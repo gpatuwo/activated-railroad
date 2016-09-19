@@ -24,6 +24,7 @@ Railroad is a MVC framework inspired by the basic functionalities of Rails.
 - Rack Exceptions
 - Rack Static Assets
 - CSRF Protection
+
 ---
 #### Bonus: 3. Demo app
 
