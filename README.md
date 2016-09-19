@@ -6,8 +6,9 @@ Activated Railroad is an ORM and web server MVC inspired by ActiveRecord and Rai
 
 ## Implementation Timeline
 #### Monday - Day 1
-- review ActiveRecord/Ruby
-- refactor ActiveRecordLite
+  - review ActiveRecord/Ruby
+- [ORM reading][orm]
+  - refactor ActiveRecordLite
 
 #### Tuesday - Day 2
 - finish ActiveRecordLite
@@ -15,10 +16,10 @@ Activated Railroad is an ORM and web server MVC inspired by ActiveRecord and Rai
 
 #### Wednesday - Day 3
 - review RailsLite
-- work on Rails part I
+- finish RailsLite part I
 
 #### Thursday - Day 4
-- work on RailsLite part II
+- finish RailsLite part II
 
 #### Friday - Day 5
 - make simple app that's a simple walkthrough of the functionality of the framework with interactive examples.
@@ -27,3 +28,5 @@ Activated Railroad is an ORM and web server MVC inspired by ActiveRecord and Rai
 - continue app
 - production README
 - release framework as a gem
+
+[orm]: https://github.com/appacademy/curriculum/blob/master/sql/readings/orm.md
