@@ -3,22 +3,22 @@ require_relative '01_sql_object'
 
 module Searchable
   def where(params)
-    search_names = params.map{|attr_name, value| "#{attr_name.to_s} = ?"}.join(" AND ")
-    search_vals = params.map{|attr_name, value| value}
-
-    results = DBConnection.execute(<<-SQL,search_vals)
+    where_query = params.keys.map {|key| "#{key} = ?"}.join(" AND ")
+    results = DBConnection.execute(<<-SQL, *params.values)
       SELECT
         *
       FROM
         #{self.table_name}
       WHERE
-        #{search_names}
+        #{where_query}
     SQL
 
-    self.parse_all(results)
+    # create new class object for each search result
+    results.map{|result| self.new(result)}
   end
 end
 
+# mix in module
 class SQLObject
   extend Searchable
 end
