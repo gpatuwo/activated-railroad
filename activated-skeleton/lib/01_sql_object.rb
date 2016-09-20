@@ -1,4 +1,3 @@
-# TODO require 'sqlite3' instead when finished
 require_relative 'db_connection'
 require 'active_support/inflector'
 
@@ -86,22 +85,41 @@ class SQLObject
   end
 
   def attribute_values
-    self.send()
+    self.class.columns.map {|column| self.send(column)}
   end
 
   def insert
-    columns = self.class.columns
+    # drop id column for now
+    columns = self.class.columns.drop(1)
     col_names = columns.join(", ")
-    q_mark_arr = ["?"] * columns.length
-    q_mars = q_mark_arr.join(", ")
+    q_marks = (["?"] * columns.length).join(", ")
 
+    DBConnection.execute(<<-SQL, *attribute_values.drop(1))
+      INSERT INTO
+        #{self.class.table_name} (#{col_names})
+      VALUES
+        (#{q_marks})
+    SQL
+
+    # assign id to object instance after finalize
+    self.id = DBConnection.last_insert_row_id
   end
 
   def update
-    # ...
+    col_new_vals = self.class.columns
+      .map {|col| "#{col} = ?"}.join(", ")
+
+    DBConnection.execute(<<-SQL, *attribute_values, self.id)
+      UPDATE
+        #{self.class.table_name}
+      SET
+        #{col_new_vals}
+      WHERE
+        id = ?
+    SQL
   end
 
   def save
-    # ...
+    id.nil? ? insert : update
   end
 end
