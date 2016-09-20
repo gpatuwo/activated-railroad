@@ -88,6 +88,7 @@ class SQLObject
     self.class.columns.map {|column| self.send(column)}
   end
 
+# TODO make private
   def insert
     # drop id column for now
     columns = self.class.columns.drop(1)
@@ -105,6 +106,7 @@ class SQLObject
     self.id = DBConnection.last_insert_row_id
   end
 
+# TODO make private
   def update
     col_new_vals = self.class.columns
       .map {|col| "#{col} = ?"}.join(", ")
