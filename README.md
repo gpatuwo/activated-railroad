@@ -11,7 +11,9 @@ Activated is the ORM inspired by ActiveRecord. It will be able to
 - translate rows from a SQL query into Ruby objects on fetch
 - translate Ruby objects into rows in the db on save
 
-Ultimately, Activated will allow Ruby classes methods to perform SQL operations without writing out SQL code directly.
+via Activated::Base (that all model classes extend from)
+
+Activated will allow Ruby classes methods to perform SQL operations without writing out SQL code directly through Activated methods.
 
 #### 2. Railroad
 Railroad is a MVC framework inspired by the basic functionalities of Rails.
@@ -34,21 +36,19 @@ Railroad is a MVC framework inspired by the basic functionalities of Rails.
 #### Monday - Day 1
   - review ActiveRecord/Ruby
 - [ORM reading][orm]
-  - refactor [ActiveRecordLite Part I][ar1]
+  - redo [ActiveRecordLite Part I][ar1]
   - review RailsLite
 
 #### Tuesday - Day 2
 - finish [ActiveRecordLite Part II][ar2]
 - remove all traces of a/a
-- research any extra features/changes for ActiveRecord
 
 #### Wednesday - Day 3
-- combining Actived + Railroad
 - finish [RailsLite Part I][rl1]
 
 #### Thursday - Day 4
 - finish [RailsLite Part II][rl2]
-- research any extra features/changes for Rails
+- combining Activated + Railroad
 
 #### Friday - Day 5
 - make simple app that's a simple walkthrough of the functionality of the framework with interactive examples.

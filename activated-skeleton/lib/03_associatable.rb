@@ -7,7 +7,7 @@ class AssocOptions
 
   # converts name to class object
   def model_class
-    class_name.constantize
+    class_name.singularize.constantize
   end
 
   def table_name
@@ -39,7 +39,6 @@ class HasManyOptions < AssocOptions
       :primary_key => :id
     }
 
-    # allows override of defaults
     defaults.keys.each do |key|
       self.send("#{key}=", options[key] || defaults[key])
     end
@@ -47,20 +46,37 @@ class HasManyOptions < AssocOptions
 end
 
 module Associatable
-  # Phase IIIb
-  def belongs_to(name, options = {})
-    # ...
+  def belongs_to(name, options_hash = {})
+    assoc_options[name] = BelongsToOptions.new(name, options_hash)
+
+    define_method(name) do
+      options = self.class.assoc_options[name]
+      # gets value of foreign key from instance of SQLObject
+      key_val = self.send(options.foreign_key)
+      options
+        .model_class
+        .where(options.primary_key => key_val)
+        .first
+    end
   end
 
-  def has_many(name, options = {})
-    # ...
+  def has_many(name, options_hash = {})
+    options = HasManyOptions.new(name, self.name, options_hash)
+
+    define_method(name) do
+      key_val = self.send(options.primary_key)
+      options
+        .model_class
+        .where(options.foreign_key => key_val)
+    end
   end
 
+  # has_one_through needs to know the options for two associations. this hash allows you to store the belongs_to association so it can reference it later for the join query
   def assoc_options
-    # Wait to implement this in Phase IVa. Modify `belongs_to`, too.
+    @assoc_options ||= {}
   end
 end
 
 class SQLObject
-  # Mixin Associatable here...
+  extend Associatable
 end
