@@ -75,7 +75,15 @@ module Associatable
   def assoc_options
     @assoc_options ||= {}
   end
+
+  def has_one_through(name, through_name, source_name)
+    through_options = assoc_options[through_name]
+    define_method(name) do
+
+    end
+  end
 end
+
 
 class SQLObject
   extend Associatable
