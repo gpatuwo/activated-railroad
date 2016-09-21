@@ -1,3 +1,5 @@
+# TODO remove cats stuff (or maybe keep for now so can use on the demo app)
+
 require 'sqlite3'
 
 PRINT_QUERIES = ENV['PRINT_QUERIES'] == 'true'
