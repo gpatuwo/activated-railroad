@@ -51,3 +51,28 @@ def has_one_through(name, through_name, source_name)
   end
 end
 ```
+---
+## Railroad
+
+### Rack Middleware
+The Rack middleware sits between a web server and the web app framework to make it easier to write frameworks and servers that work with existing software (how does it make it easier??? read [this][rack]).
+#### Rack Exceptions
+#### Rack Static Assets
+### ControllerBase
+Each controller class in Railroad inherits from `ControllerBase` (which is akin to ActionController::Base in Rails). ControllerBase's job basically is to take in HTTP Request and Response objects as inputs and create methods that figure out what to do with them. These methods include:
+- creating the response render (`ControllerBase#render_content`)
+- handling redirects (`ControllerBase#redirect_to`)
+- and handle template rendering
+### Template Rendering
+The `ControllerBase#render` method is able to
+- create the path to a template file by using the template name and the controller
+- read the template file from `File.read`
+- create a new ERB template from the contents of the file
+- use Kernel's `binding` to capture the controller's ivars to evaluate the ERB template
+- pass result to `#render_content`
+### Session
+### Routing
+### Flash
+### CSRF Protection
+
+[rack]:https://github.com/appacademy/curriculum/blob/master/rails/readings/rack.md
