@@ -6,8 +6,8 @@ app = Proc.new do |env|
   req = Rack::Request.new(env)
   res = Rack::Response.new
   #  Content-Type tells the browser what the server has given it in response
-  res['Content-Type'] = 'text/html'
-  res.write("Hello world!")
+  res['Content-Type'] = 'text/text'
+  res.write(req.path)
   res.finish
 end
 
