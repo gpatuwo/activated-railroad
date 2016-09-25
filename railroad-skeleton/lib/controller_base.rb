@@ -25,6 +25,9 @@ class ControllerBase
     @res['Location'] = url
     # whereas status isan instance attribute
     @res.status = 302
+    # so session data store in cookie after res built
+    session.store_session(@res)
+
     @already_built_response = true
   end
 
@@ -35,6 +38,7 @@ class ControllerBase
     raise "you can't render twice :( " if already_built_response?
     @res['Content-Type'] = content_type
     @res.write(content)
+    session.store_session(@res)
     @already_built_response = true
   end
 
@@ -52,6 +56,7 @@ class ControllerBase
 
   # method exposing a `Session` object
   def session
+    @session ||= Session.new(@req)
   end
 
   # use this with the router to call action_name (:index, :show, :create...)
