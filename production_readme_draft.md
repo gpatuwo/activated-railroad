@@ -1,7 +1,40 @@
 # Activated Railroad
+## Background
 
+Activated Railroad is an ORM and web server MVC inspired by ActiveRecord and Rails respectively.
+
+## Functionality
+This project is divided into two parts:
+#### 1. Activated
+Activated is the ORM inspired by ActiveRecord. It will be able to
+- translate rows from a SQL query into Ruby objects on fetch
+- translate Ruby objects into rows in the db on save
+
+via Activated::Base (that all model classes extend from)
+
+Activated will allow Ruby classes methods to perform SQL operations without writing out SQL code directly through Activated methods.
+
+#### 2. Railroad
+Railroad is a MVC framework inspired by the basic functionalities of Rails.
+- Rack
+- ControllerBase
+- Template rendering (ERB)
+- Session
+- Routing
+- Flash
+- Rack Exceptions
+- Rack Static Assets
+- CSRF Protection
+
+** FIY: I was very liberal with comments in this repo in order to better illustrate the purpose/reasoning behind the code.
 ## Activated
+Activated is the ORM inspired by ActiveRecord. It will be able to
+- translate rows from a SQL query into Ruby objects on fetch
+- translate Ruby objects into rows in the db on save
 
+via Activated::Base (that all model classes extend from)
+
+Activated will allow Ruby classes methods to perform SQL operations without writing out SQL code directly through Activated methods.
 ### SQLObject
 
 ### Associations
@@ -53,6 +86,7 @@ end
 ```
 ---
 ## Railroad
+Railroad is a MVC framework inspired by the basic functionalities of Rails.
 
 ### Rack Middleware
 The Rack middleware sits between a web server and the web app framework to make it easier to write frameworks and servers that work with existing software (how does it make it easier??? read [this][rack]).
@@ -63,6 +97,7 @@ Each controller class in Railroad inherits from `ControllerBase` (which is akin 
 - creating the response render (`ControllerBase#render_content`)
 - handling redirects (`ControllerBase#redirect_to`)
 - and handle template rendering
+
 ### Template Rendering
 The `ControllerBase#render` method is able to
 - create the path to a template file by using the template name and the controller
@@ -70,7 +105,11 @@ The `ControllerBase#render` method is able to
 - create a new ERB template from the contents of the file
 - use Kernel's `binding` to capture the controller's ivars to evaluate the ERB template
 - pass result to `#render_content`
+
 ### Session
+Servers uses cookies to store information that persist on the client side. The server will only have access to a cookie that matches the current request path. For determining session, the cookie needs to be available to any path, so I set the session cookie path to `/`.
+
+To dry up the code, I created a `Session` helper class to deal with session/cookie interaction.
 ### Routing
 ### Flash
 ### CSRF Protection
