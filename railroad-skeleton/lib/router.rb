@@ -33,9 +33,9 @@ class Router
     @routes.push(Route.new(pattern, method, controller_class, action_name))
   end
 
-  # evaluate the proc in the context of the instance
-  # for syntactic sugar :)
+  # evaluate the proc in the context of the instance for syntactic sugar :)
   def draw(&proc)
+    instance_eval(&proc)
   end
 
 

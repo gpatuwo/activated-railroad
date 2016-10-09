@@ -6,16 +6,16 @@ Activated Railroad is an ORM and web server MVC inspired by ActiveRecord and Rai
 ## Functionality
 This project is divided into two parts:
 #### 1. Activated
-Activated is the ORM inspired by ActiveRecord. It will be able to
+Activated is the ORM inspired by ActiveRecord. It is able to
 - translate rows from a SQL query into Ruby objects on fetch
 - translate Ruby objects into rows in the db on save
 
 via Activated::Base (that all model classes extend from)
 
-Activated will allow Ruby classes methods to perform SQL operations without writing out SQL code directly through Activated methods.
+Activated allows Ruby classes methods to perform SQL operations without writing out SQL code directly through Activated methods.
 
 #### 2. Railroad
-Railroad is a MVC framework inspired by the basic functionalities of Rails.
+Railroad is a MVC framework inspired by the basic functionalities of Rails, including:
 - Rack
 - ControllerBase
 - Template rendering (ERB)
@@ -28,13 +28,7 @@ Railroad is a MVC framework inspired by the basic functionalities of Rails.
 
 ** FIY: I was very liberal with comments in this repo in order to better illustrate the purpose/reasoning behind the code.
 ## Activated
-Activated is the ORM inspired by ActiveRecord. It will be able to
-- translate rows from a SQL query into Ruby objects on fetch
-- translate Ruby objects into rows in the db on save
-
-via Activated::Base (that all model classes extend from)
-
-Activated will allow Ruby classes methods to perform SQL operations without writing out SQL code directly through Activated methods.
+Activated is the ORM inspired by ActiveRecord.
 ### SQLObject
 
 ### Associations
@@ -89,9 +83,9 @@ end
 Railroad is a MVC framework inspired by the basic functionalities of Rails.
 
 ### Rack Middleware
-The Rack middleware sits between a web server and the web app framework to make it easier to write frameworks and servers that work with existing software (how does it make it easier??? read [this][rack]).
-#### Rack Exceptions
-#### Rack Static Assets
+The Rack middleware sits between a web server and the web app framework to make it easier to write frameworks and servers that work with existing software. <!-- (how does it make it easier??? read [this][rack]) -->
+<!-- #### Rack Exceptions
+#### Rack Static Assets -->
 ### ControllerBase
 Each controller class in Railroad inherits from `ControllerBase` (which is akin to ActionController::Base in Rails). ControllerBase's job basically is to take in HTTP Request and Response objects as inputs and create methods that figure out what to do with them. These methods include:
 - creating the response render (`ControllerBase#render_content`)
@@ -115,7 +109,9 @@ To handle routing functionalities, I created both a `Router` class and a `Route`
 
 A `Route` object is basically a row in Rail's `rake routes` and, correspondingly, knows what path to match, what controller it belongs to and what controller method to run.
 
-`Router`'s job is to receive an HTTP Request and figure out which `Route` matches the requested path. After which it will instantiate the `Route`'s controller and run the correct method.
+`Router`'s job is to receive an HTTP Request and figure out which `Route` matches the requested path. After which it will instantiate the `Route`'s controller and run the correct method (or throw a 404 status code).
+
+Additionally `Router` contains a `#draw` method that's basically syntactic sugar to allow the user to define groups of routes easily.
 
 ### Flash
 ### CSRF Protection
