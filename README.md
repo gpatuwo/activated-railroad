@@ -29,7 +29,7 @@ Railroad is a MVC framework inspired by the basic functionalities of Rails, incl
 ** FIY: I was very liberal with comments in this repo in order to better illustrate the purpose/reasoning behind the code.
 ## Activated
 Activated is the ORM inspired by ActiveRecord.
-### SQLObject
+<!-- ### SQLObject -->
 
 ### Associations
 I created BelongsToOptions and HasManyOptions classes to provide default values for the :foreign_key, :class_name, :primary_key association keys and also allows these default to be overridden. Each of these classes extend from the AssocOptions class, which contains `AssocOptions#model_class` that returns the class of the associated object.
@@ -83,7 +83,8 @@ end
 Railroad is a MVC framework inspired by the basic functionalities of Rails.
 
 ### Rack Middleware
-The Rack middleware sits between a web server and the web app framework to make it easier to write frameworks and servers that work with existing software. <!-- (how does it make it easier??? read [this][rack]) -->
+The Rack middleware sits between a web server and the web app framework to make it easier to write frameworks and servers that work with existing software.
+<!-- (how does it make it easier??? read [this][rack]) -->
 <!-- #### Rack Exceptions
 #### Rack Static Assets -->
 ### ControllerBase
