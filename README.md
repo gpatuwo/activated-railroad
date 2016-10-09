@@ -115,7 +115,7 @@ To handle routing functionalities, I created both a `Router` class and a `Route`
 
 A `Route` object is basically a row in Rail's `rake routes` and, correspondingly, knows what path to match, what controller it belongs to and what controller method to run.
 
-`Router`'s job is to receive an HTTP Request and figure out which `Route` matches the requested path.
+`Router`'s job is to receive an HTTP Request and figure out which `Route` matches the requested path. After which it will instantiate the `Route`'s controller and run the correct method.
 
 ### Flash
 ### CSRF Protection
