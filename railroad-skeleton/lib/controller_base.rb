@@ -7,10 +7,11 @@ class ControllerBase
   attr_reader :req, :res, :params
 
   # Setup the controller. Takes in HTTP Request + Response objects
-  def initialize(req, res, params)
+  def initialize(req, res, route_params = {})
     @req = req
     @res = res
-    @params = params
+    # merge route params with query and body params from rack req 
+    @params = route_params.merge(req.params)
     @already_built_response = false
   end
 
